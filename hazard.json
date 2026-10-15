@@ -1,0 +1,60 @@
+{
+  "format": "avsim-studio/1",
+  "params": {
+    "cutT0": 9.2257882419714,
+    "cutDur": 6.002090013162907,
+    "cutV": 16.713690349514415,
+    "cutDs": 6.845748556453618,
+    "pedT0": 13.507935459036462,
+    "pedV": 1.1132384732859215,
+    "busGo": 17.859889588921163,
+    "tgT": 0.6290227357172138,
+    "cutGap": 6.092477911583063,
+    "pedGap": 3.0081510299815912,
+    "mu": 0.5,
+    "pedLook": 0.0,
+    "cutBrake": 3.4810624706602002,
+    "civil": true
+  },
+  "policy": {
+    "v0": 12.5,
+    "T": 1.6,
+    "a": 1.4,
+    "b": 2.0,
+    "s0": 2.5,
+    "cautionV": 7.5,
+    "cautionRange": 55.0,
+    "pedBuffer": 2.5,
+    "cutinLat": 2.15
+  },
+  "hazards": [
+    {
+      "type": "brake",
+      "who": "C2",
+      "decel": 1.2,
+      "dur": 2.2,
+      "t0": 4.0,
+      "trig": 25.0
+    }
+  ],
+  "space": {
+    "h0_decel": [
+      0.8,
+      1.5
+    ],
+    "h0_dur": [
+      1.5,
+      3.0
+    ],
+    "h0_t0": [
+      0.0,
+      12.0
+    ],
+    "h0_trig": [
+      15.0,
+      50.0
+    ]
+  },
+  "exposure": 0.0023,
+  "why": "A vehicle cutting into the ego lane then braking is my new hazard. NHTSA 100-Car Phase II reports 64 near-crashes and 324 incidents with a cut-in ahead among about 2,025,000 miles (DOT HS 810 593, Goal 6, https://www.nhtsa.gov/sites/nhtsa.gov/files/100carmain.pdf; top-level mileage also reported in Table 2.7). I use (64+324)/2,025,000 × 12 miles/trip = 0.00230 per trip as a deliberately generous proxy for cut-ins that also brake; this is not a direct estimate of the narrower combined event. The sampled brake range 0.8–1.5 m/s² is about 0.08–0.15 g and matches the NHTSA naturalistic lead-deceleration range of 0.05–0.15 g (https://www.nhtsa.gov/document/modeling-driver-response-lead-vehicle-decelerating); the duration and trigger ranges are scenario design ranges inside avsim/studio.py LIMITS, not measured population distributions. The conservative exposure likely overstates frequency of the combined event; a local naturalistic fleet dataset with event labels and odometer distance is needed to estimate it directly."
+}

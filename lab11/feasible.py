@@ -1,6 +1,8 @@
 """Part B: physics check. TODO 3."""
 from __future__ import annotations
 
+import math
+
 G = 9.81
 
 
@@ -14,4 +16,15 @@ def is_feasible(p: dict) -> bool:
     - the cut-in speed p["cutV"] is not in (0, 22] m/s.
     mu is p["mu"]. A search that keeps infeasible scenarios reports failures that cannot happen.
     """
-    raise NotImplementedError("TODO 3: is_feasible")
+    mu = float(p["mu"])
+    grip = mu * G
+    cut_dur = float(p["cutDur"])
+    if cut_dur <= 0:
+        return False
+    lateral_accel = (math.pi / cut_dur) ** 2 * 3.5 / 2
+    return bool(
+        lateral_accel <= grip
+        and float(p["cutBrake"]) <= grip
+        and float(p["pedV"]) <= 2.5
+        and 0.0 < float(p["cutV"]) <= 22.0
+    )
